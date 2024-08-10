@@ -9,16 +9,12 @@ from text_recognition import recognize_text_from_image
 def main(image_directory, csv_output_path):
     class_names = ['bottom_left', 'bottom_right', 'top_left', 'top_right']
 
-    # Load models
     model_cnn, model, model1, model2 = load_models()
 
-    # Create or open the CSV file
     with open(csv_output_path, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        # Write the header
         writer.writerow(['filename', 'id'])
 
-        # Loop through each image in the directory
         for filename in os.listdir(image_directory):
             if filename.endswith(".jpg") or filename.endswith(".png"):
                 image_path = os.path.join(image_directory, filename)
@@ -41,7 +37,6 @@ def main(image_directory, csv_output_path):
 
                 print(f'Image: {filename}, ID: {recognized_text}')
 
-                # Write the result to the CSV file
                 writer.writerow([filename, recognized_text])
 
 if __name__ == "__main__":
